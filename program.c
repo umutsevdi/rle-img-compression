@@ -330,6 +330,64 @@ int main(void)
         }
         else if (strcmp(command, "edit") == 0)
         {
+            printf("Edit By Pixel mode is disabled because of certain errors");
+            /*
+            printf("\nEdit Color By Coordiante\n%cEnter the row and column with space\n> ", 192);
+            int row, column, newColor;
+            scanf("%d %d", &row, &column);
+            printf("\n%cEnter the color you would like to replace with\n> ", 192);
+            scanf("%d", &newColor);
+            int point = row * (width - 1) + column;
+
+            current = head;
+            last = current;
+            i = 0;
+            flag = 0;
+            while (current->next != NULL)
+            {
+                printf("%3d[%d", current->value, current->count);
+                i += current->count + 1;
+                if (i >= point && !flag)
+                {
+                    printf(",%d", point);
+                    if (newColor == current->value)
+                    {
+                        printf("\n>Error\t| Properties are equal");
+                        exit(0);
+                    }
+                    else if (current->count > 0)
+                    {
+                        pixel *tmpCurrent = (pixel *)malloc(sizeof(pixel));
+                        tmpCurrent->value = newColor;
+                        tmpCurrent->count = 0;
+                        tmpCurrent->next = current->next;
+                        current->next = tmpCurrent->next;
+                        if (point - (i - current->count - 1) > 0)
+                        {
+                            pixel *tmpCurrent2 = (pixel *)malloc(sizeof(pixel));
+                            tmpCurrent2->value = current->value;
+                            tmpCurrent2->count = point - (i - current->count - 1);
+                            tmpCurrent2->next = current->next;
+                            tmpCurrent->next = tmpCurrent2->next;
+                        }
+                    }
+                    else
+                    {
+                        if (current->next->value != newColor)
+                            current->value = newColor;
+                    }
+                    flag = 1;
+                }
+                printf("] ");
+                current = current->next;
+            }
+            printf("\n%d %d %d\n", current->value, i, point);
+            current = head;
+            while (current->next != NULL)
+            {
+                printf("%3d[%d] ", current->value, current->count);
+                current = current->next;
+            }*/
         }
         else if (strcmp(command, "histogram") == 0)
         {
