@@ -1,6 +1,6 @@
 <br />
 <p align="center">
-  <a href="https://github.com/umutsevdi/RLE-Image-Compresssion">
+  <a href="https://github.com/umutsevdi/RLE-Image-Compression">
     <img src="https://cdn.iconscout.com/icon/free/png-512/c-programming-569564.png" alt="Logo" width="80" height="80">
   </a>
   
