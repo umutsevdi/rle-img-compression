@@ -19,18 +19,17 @@ int main(void)
 {
     char filename[40];
     char *file;
-
     int i, j, count, flag = 0;
     int width, height;
     char chunk[30];
-    printf("\n\nRLE File Encoder - Decoder\t|\n\t\t\t\t| Umutcan Sevdi\n\t\t\t\t| 19011091 \nCommand List\n\t%ccompress  :\tCompresses an image with RLE, saves as '.sqz'.\n\t%cconstruct :\tDisplays the avaliable commands for the encoded file.\n> ", 192, 192);
+    printf("\n\nRLE File Encoder - Decoder\t|\n\t\t\t\t| Umutcan Sevdi\n\t\t\t\t| 19011091 \nCommand List\n\t└ compress  :\tCompresses an image with RLE, saves as '.sqz'.\n\t└ construct :\tDisplays the avaliable commands for the encoded file.\n> ");
     char command[5];
     scanf("%s", command);
     if (strcmp(command, "compress") == 0)
     {
         printf("\n>Compress Image");
 
-        printf("\n%c Enter the file name without the extension\n> ", 192);
+        printf("\n└ Enter the file name without the extension\n> ");
         scanf("%s", &filename);
 
         int **matrix;
@@ -42,7 +41,7 @@ int main(void)
 
         if (fp == NULL)
         {
-            perror(">Error\t| Unable to open file");
+            perror(">Error\t| Unable to open file\n");
             exit(1);
         }
         else
@@ -62,9 +61,10 @@ int main(void)
         last = current;
         current->next = NULL;
         printf("\nStats\t| Width : %d \t |\tHeight : %d\n", width, height);
+        count = 0;
         for (i = 0; i < height; i++)
         {
-            printf("%c Read Line %d\n", 192, i);
+            printf("└ Read Line %d\n", i);
             for (j = 0; j < width; j++)
             {
                 if (j + 1 < width)
@@ -99,7 +99,7 @@ int main(void)
 
         if (fp == NULL)
         {
-            printf("\n>Error\t| Unable to open file");
+            printf("\n>Error\t| Unable to open file\n");
             exit(1);
         }
         else
@@ -125,7 +125,7 @@ int main(void)
         char ch;
         printf("\n>Construct Menu");
 
-        printf("\n%c Enter the file name without the extension\n> ", 192);
+        printf("\n└ Enter the file name without the extension\n> ");
         scanf("%s", &filename);
         strcat(filename, ".sqz");
         file = removeString(filename, 4);
@@ -133,7 +133,7 @@ int main(void)
 
         if (fp == NULL)
         {
-            perror(">Error\t| Unable to open file");
+            perror(">Error\t| Unable to open file\n");
             exit(1);
         }
         else
@@ -162,21 +162,23 @@ int main(void)
         {
             if (current->value > 256 || current->value < 0)
             {
-                printf("\n>Error\t| File color interval is out of bounds");
+                printf("\n>Error\t| File color interval is out of bounds\n");
                 exit(2);
             }
-            else if (current->value == current->next->value)
+            /*e
+            lse if (current->value == current->next->value)
             {
-                printf("\n>Error\t| File is not encoded as expected");
+                printf("\n>Error\t| File is not encoded as expected\n");
                 exit(3);
             }
+            */
             else if (current->value > max)
                 max = current->value;
 
             if (i > 15)
             {
                 i = 0;
-                printf("\n%c Output %d ", 192, current->value);
+                printf("\n└ Output %d ", current->value);
             }
             else
             {
@@ -185,7 +187,7 @@ int main(void)
             }
             current = current->next;
         }
-        printf("\nCommand List\n\t%cdecode    :\tReconstructs a compressed image, saves as '.pgm''.\n\t%crecolor   :\tChanges the all instances of a color in the file.\n\t%chistogram :\tDisplays the color scale in histogram.\n> ", 192, 192, 192);
+        printf("\nCommand List\n\t└ decode    :\tReconstructs a compressed image, saves as '.pgm''.\n\t└ recolor   :\tChanges the all instances of a color in the file.\n\t└ edit      :\tEdits the given pixel in the file.\n\t└ histogram :\tDisplays the color scale in histogram.\n> ");
         scanf("%s", command);
         if (strcmp(command, "decode") == 0)
         {
@@ -194,7 +196,7 @@ int main(void)
 
             if (fp == NULL)
             {
-                printf("\n>Error\t| Unable to open file");
+                printf("\n>Error\t| Unable to open file\n");
                 exit(1);
             }
             else
@@ -231,16 +233,16 @@ int main(void)
         }
         else if (strcmp(command, "recolor") == 0)
         {
-            printf("\nEdit Color\n%cEnter the color you would like to change\n> ", 192);
+            printf("\nEdit Color\n└ Enter the color you would like to change\n> ");
             int oldColor;
             int newColor;
             scanf("%d", &oldColor);
-            printf("\nEdit Color\n%cEnter the color you would like to replace with\n> ", 192);
+            printf("\nEdit Color\nEnter the color you would like to replace with\n> ");
             scanf("%d", &newColor);
 
             if (newColor == oldColor)
             {
-                printf("\n>Error\t| Properties are equal");
+                printf("\n>Error\t| Properties are equal\n");
                 exit(1);
             }
             else
@@ -256,7 +258,7 @@ int main(void)
                 if (current->value == oldColor)
                 {
                     current->value = newColor;
-                    printf("%d%c%d[%d]  ", current->value, 175, oldColor, current->count);
+                    printf("%d»%d[%d]  ", current->value, oldColor, current->count);
                 }
                 else
                 {
@@ -310,7 +312,7 @@ int main(void)
 
             if (fp == NULL)
             {
-                printf("\n>Error\t| Unable to open file");
+                printf("\n>Error\t| Unable to open file\n");
                 exit(1);
             }
             else
@@ -327,6 +329,67 @@ int main(void)
             }
             printf("\n>Result\t| Writing Completed");
             fclose(fp);
+        }
+        else if (strcmp(command, "edit") == 0)
+        {
+            printf("Edit By Pixel mode is disabled because of certain errors\n");
+            /*
+            printf("\nEdit Color By Coordiante\n└ Enter the row and column with space\n> ");
+            int row, column, newColor;
+            scanf("%d %d", &row, &column);
+            printf("\n└ Enter the color you would like to replace with\n> ");
+            scanf("%d", &newColor);
+            int point = row * (width - 1) + column;
+
+            current = head;
+            last = current;
+            i = 0;
+            flag = 0;
+            while (current->next != NULL)
+            {
+                printf("%3d[%d", current->value, current->count);
+                i += current->count + 1;
+                if (i >= point && !flag)
+                {
+                    printf(",%d", point);
+                    if (newColor == current->value)
+                    {
+                        printf("\n>Error\t| Properties are equal");
+                        exit(0);
+                    }
+                    else if (current->count > 0)
+                    {
+                        pixel *tmpCurrent = (pixel *)malloc(sizeof(pixel));
+                        tmpCurrent->value = newColor;
+                        tmpCurrent->count = 0;
+                        tmpCurrent->next = current->next;
+                        current->next = tmpCurrent->next;
+                        if (point - (i - current->count - 1) > 0)
+                        {
+                            pixel *tmpCurrent2 = (pixel *)malloc(sizeof(pixel));
+                            tmpCurrent2->value = current->value;
+                            tmpCurrent2->count = point - (i - current->count - 1);
+                            tmpCurrent2->next = current->next;
+                            tmpCurrent->next = tmpCurrent2->next;
+                        }
+                    }
+                    else
+                    {
+                        if (current->next->value != newColor)
+                            current->value = newColor;
+                    }
+                    flag = 1;
+                }
+                printf("] ");
+                current = current->next;
+            }
+            printf("\n%d %d %d\n", current->value, i, point);
+            current = head;
+            while (current->next != NULL)
+            {
+                printf("%3d[%d] ", current->value, current->count);
+                current = current->next;
+            }*/
         }
         else if (strcmp(command, "histogram") == 0)
         {
@@ -384,6 +447,7 @@ int main(void)
                 }
                 tmpCurrent = tmpCurrent->next;
             }
+            printf("\n");
         }
         else
         {
@@ -421,7 +485,7 @@ void readLinkedList(FILE *fp, pixel *current, int pxCount)
     }
     if (i != pxCount)
     {
-        printf("\n>Error\t| Encoded file's pixel count is not matching with the expected value");
+        printf("\n>Error\t| Encoded file's pixel count is not matching with the expected value\n");
         exit(3);
     }
 }
